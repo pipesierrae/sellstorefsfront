@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
 
-const Layout = ({ children }) => {
+const PublicLayout = ({ children }) => {
   return (
     <div className='flex flex-col justify-between h-screen'>
       <Navbar />
@@ -12,4 +12,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default PublicLayout;
