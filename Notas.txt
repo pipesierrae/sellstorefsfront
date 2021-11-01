@@ -1,0 +1,10 @@
+Elementos con informacion perzonalizada
+
+src/components/PrivateRoute.jsx
+audience: `api-auth-sellstorefs`
+
+src/App.jsx
+domain='sellstoresfs.us.auth0.com'
+clientId='aGwseTo1m9udF9ts9qy1a3QNtdRTcAgh'
+redirectUri='http://localhost:3000/admin'
+audience='api-auth-sellstorefs'
