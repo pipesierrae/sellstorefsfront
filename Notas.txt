@@ -1,4 +1,4 @@
-Elementos con informacion perzonalizada
+//Elementos con informacion perzonalizada
 
 src/components/PrivateRoute.jsx
 audience: `api-auth-sellstorefs`
