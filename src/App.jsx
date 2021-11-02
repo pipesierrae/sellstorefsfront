@@ -27,7 +27,7 @@ function App() {
     <Auth0Provider
       domain='sellstoresfs.us.auth0.com'
       clientId='aGwseTo1m9udF9ts9qy1a3QNtdRTcAgh'
-      redirectUri='http://localhost:3000/admin'
+      redirectUri='https://hidden-lake-91688.herokuapp.com/admin'
       audience='api-auth-sellstorefs'
     >
       <div className='App'>
