@@ -116,9 +116,9 @@ const TablaVehiculos = ({ loading, listaVehiculos, setEjecutarConsulta }) => {
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Nombre del vehículo</th>
-                <th>Marca del vehículo</th>
-                <th>Modelo del vehículo</th>
+                <th>Descripción</th>
+                <th>Valor</th>
+                <th>Estado</th>
                 <PrivateComponent roleList={['admin']}>
                   <th>Acciones</th>
                 </PrivateComponent>
@@ -363,7 +363,7 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
       <h2 className='text-2xl font-extrabold text-gray-800'>Crear nuevo vehículo</h2>
       <form ref={form} onSubmit={submitForm} className='flex flex-col'>
         <label className='flex flex-col' htmlFor='nombre'>
-          Nombre del vehículo
+          Descripción
           <input
             name='name'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
@@ -373,34 +373,28 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
           />
         </label>
         <label className='flex flex-col' htmlFor='marca'>
-          Marca del vehículo
+          Precio
+          <input className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+            name='brand'
+            type='text'
+            placeholder='0'
+            required
+          />
+        </label>
+        <label className='flex flex-col' htmlFor='model'>
+          Estado
           <select
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            name='brand'
+            name='model'
             required
             defaultValue={0}
           >
             <option disabled value={0}>
               Seleccione una opción
             </option>
-            <option>Renault</option>
-            <option>Toyota</option>
-            <option>Ford</option>
-            <option>Mazda</option>
-            <option>Chevrolet</option>
+            <option>Disponible</option>
+            <option>No disponible</option>
           </select>
-        </label>
-        <label className='flex flex-col' htmlFor='modelo'>
-          Modelo del vehículo
-          <input
-            name='model'
-            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            type='number'
-            min={1992}
-            max={2022}
-            placeholder='2014'
-            required
-          />
         </label>
 
         <button
