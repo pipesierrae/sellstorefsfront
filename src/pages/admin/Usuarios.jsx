@@ -26,7 +26,7 @@ const Usuarios = () => {
     <div>
       <div>admin usuarios</div>
       <PrivateComponent roleList={['admin']}>
-        <button className='bg-red-400'>Hola RBAC</button>
+        <button className='bg-green-700'>Acceso Autorizado</button>
       </PrivateComponent>
       <table className='tabla'>
         <thead>

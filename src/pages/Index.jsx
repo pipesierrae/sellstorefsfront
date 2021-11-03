@@ -5,7 +5,7 @@ const Index = () => {
   const { darkMode } = useDarkMode();
   return (
     <div className={`flex h-full bg-gray-${darkMode ? '900' : '50'}`}>
-      Contenido Landing Tienda de Autos
+      <h1 className='text-center font-extrabold justify-center'>¡¡¡Los Mejores Autos!!!</h1>
     </div>
   );
 };
