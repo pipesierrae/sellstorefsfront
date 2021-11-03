@@ -372,16 +372,16 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
             required
           />
         </label>
-        <label className='flex flex-col' htmlFor='marca'>
-          Precio
-          <input className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+        <label className='flex flex-col' htmlFor='valor'>
+          Valor
+          <input
             name='brand'
-            type='text'
+            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
             placeholder='0'
             required
           />
         </label>
-        <label className='flex flex-col' htmlFor='model'>
+        <label className='flex flex-col' htmlFor='estado'>
           Estado
           <select
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'

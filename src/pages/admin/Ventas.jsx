@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import React, { useState, useEffect, useRef } from 'react';
+import { toast } from 'react-toastify';
 import { crearVenta } from 'utils/api';
 import { obtenerVehiculos } from 'utils/api';
 import { obtenerUsuarios } from 'utils/api';
@@ -144,9 +145,11 @@ const Ventas = () => {
       datosVenta,
       (response) => {
         console.log(response);
+        toast.success('Venta agregada con éxito');
       },
       (error) => {
         console.error(error);
+        toast.error('Error creando la venta');
       }
     );
   };
@@ -311,14 +314,14 @@ const FilaVehiculo = ({ veh, index, eliminarVehiculo, modificarVehiculo }) => {
                 ...vehiculo,
                 cantidad: e.target.value === '' ? '0' : e.target.value,
                 total:
-                  parseFloat(vehiculo.valor) *
+                  parseFloat(vehiculo.brand) *
                   parseFloat(e.target.value === '' ? '0' : e.target.value),
               });
             }}
           />
         </label>
       </td>
-      <td>{vehiculo.valor}</td>
+      <td>{vehiculo.brand}</td>
       <td>{parseFloat(vehiculo.total ?? 0)}</td>
       <td>
         <i
