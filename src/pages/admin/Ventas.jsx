@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import React, { useState, useEffect, useRef } from 'react';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { crearVenta } from 'utils/api';
 import { obtenerVehiculos } from 'utils/api';
 import { obtenerUsuarios } from 'utils/api';
@@ -287,6 +287,7 @@ const TablaVehiculos = ({ vehiculos, setVehiculos, setVehiculosTabla }) => {
           })}
         </tbody>
       </table>
+      <ToastContainer position='bottom-center' autoClose={5000} />
     </div>
   );
 };
