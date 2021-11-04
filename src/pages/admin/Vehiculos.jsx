@@ -50,7 +50,7 @@ const Vehiculos = () => {
       setColorBoton('indigo');
     } else {
       setTextoBoton('Mostrar Todos los vehículos');
-      setColorBoton('green');
+      setColorBoton('blue');
     }
   }, [mostrarTabla]);
   return (
@@ -82,7 +82,7 @@ const Vehiculos = () => {
           setVehiculos={setVehiculos}
         />
       )}
-      <ToastContainer position='bottom-center' autoClose={5000} />
+      {/* <ToastContainer position='bottom-center' autoClose={5000} /> */}
     </div>
   );
 };
@@ -399,7 +399,7 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
 
         <button
           type='submit'
-          className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'
+          className='col-span-2 bg-indigo-900 p-2 rounded-full shadow-md hover:bg-indigo-600 text-white'
         >
           Guardar vehiculo
         </button>
