@@ -1,6 +1,7 @@
 import PrivateComponent from 'components/PrivateComponent';
 import { nanoid } from 'nanoid';
 import React, { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { editarUsuario } from 'utils/api';
 import { obtenerUsuarios } from 'utils/api';
 
@@ -68,9 +69,11 @@ const RolesUsuario = ({ user }) => {
         { rol },
         (res) => {
           console.log(res);
+          toast.success('Usuario modificado con éxito');
         },
         (err) => {
           console.error(err);
+          toast.success('Error modificado Usuario');
         }
       );
     };
@@ -101,9 +104,11 @@ const EstadoUsuario = ({ user }) => {
         { estado },
         (res) => {
           console.log(res);
+          toast.success('Usuario modificado con éxito');
         },
         (err) => {
           console.error(err);
+          toast.success('error modificado usuario');
         }
       );
     };
@@ -113,6 +118,7 @@ const EstadoUsuario = ({ user }) => {
   }, [estado, user]);
 
   return (
+    <div>
     <select value={estado} onChange={(e) => setEstado(e.target.value)}>
       <option value='' disabled>
         Seleccione un estado
@@ -127,6 +133,8 @@ const EstadoUsuario = ({ user }) => {
         Rechazado
       </option>
     </select>
+    <ToastContainer position='bottom-center' autoClose={5000} />
+    </div>
   );
 };
 
