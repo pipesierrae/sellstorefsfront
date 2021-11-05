@@ -264,8 +264,8 @@ const TablaVehiculos = ({ vehiculos, setVehiculos, setVehiculosTabla }) => {
           <tr>
             <th>Id</th>
             <th>Nombre</th>
-            <th>Marca</th>
-            <th>Modelo</th>
+            <th>Valor</th>
+            <th>Estado</th>
             <th>Cantidad</th>
             <th>Valor Unitario</th>
             <th>Total</th>
