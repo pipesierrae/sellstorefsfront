@@ -7,7 +7,6 @@ const Navbar = () => {
   return (
     <nav className='bg-black'>
       <ul className='text-white flex w-full justify-between my-5'>
-        <li>Logo</li>
         <li>
           <TriggerDarkMode />
         </li>
