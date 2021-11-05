@@ -25,9 +25,9 @@ const Usuarios = () => {
 
   return (
     <div>
-      <div>admin usuarios</div>
+      <div className='text-3xl font-extrabold text-gray-900 text-center'>Administración de Usuarios</div>
       <PrivateComponent roleList={['admin']}>
-        <button className='bg-green-700'>Acceso Autorizado</button>
+        <button className='bg-green-600 text-white'>Acceso Autorizado</button>
       </PrivateComponent>
       <table className='tabla'>
         <thead>

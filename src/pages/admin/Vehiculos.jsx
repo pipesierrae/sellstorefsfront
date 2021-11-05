@@ -56,7 +56,7 @@ const Vehiculos = () => {
   return (
     <div className='flex h-full w-full flex-col items-center justify-start p-8'>
       <div className='flex flex-col w-full'>
-        <h2 className='text-3xl font-extrabold text-gray-900'>
+        <h2 className='text-3xl font-extrabold text-gray-900 text-center'>
           Página de administración de vehículos
         </h2>
         <button
