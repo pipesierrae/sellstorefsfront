@@ -157,7 +157,7 @@ const Ventas = () => {
   return (
     <div className='flex h-full w-full items-center justify-center'>
       <form ref={form} onSubmit={submitForm} className='flex flex-col h-full'>
-        <h1 className='text-3xl font-extrabold text-gray-900 my-3'>Crear una nueva venta</h1>
+        <h1 className='text-3xl font-extrabold text-gray-900 text-center'>Administración de Ventas</h1>
         <label className='flex flex-col' htmlFor='vendedor'>
           <span className='text-2xl font-gray-900'>Vendedor</span>
           <select name='vendedor' className='p-2' defaultValue='' required>
