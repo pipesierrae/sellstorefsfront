@@ -4,15 +4,30 @@ import { ToastContainer, toast } from 'react-toastify';
 import { crearVenta } from 'utils/api';
 import { obtenerVehiculos } from 'utils/api';
 import { obtenerUsuarios } from 'utils/api';
-import PrivateComponent from 'components/PrivateComponent';
-
+import { obtenerVentas } from 'utils/api';
 
 const Ventas = () => {
   const form = useRef(null);
   const [vendedores, setVendedores] = useState([]);
   const [vehiculos, setVehiculos] = useState([]);
   const [vehiculosTabla, setVehiculosTabla] = useState([]);
+  const [ventas, setVentas] = useState([]);
 
+  useEffect(() => {
+    const fetchVentas = async () => {
+      await obtenerVentas(
+        (respuesta) => {
+          console.log('ventaaaaaaas', respuesta.data);
+          setVentas(respuesta.data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    };    
+    fetchVentas();
+  }, []);
+  
   useEffect(() => {
     const fetchVendores = async () => {
       await obtenerUsuarios(
@@ -117,7 +132,9 @@ const Ventas = () => {
         </button>
         <br/>
         <h2 className='text-2xl font-extrabold text-gray-800 text-center'>Todas las Ventas</h2>
-        <TablaVentas />
+        <TablaVentas 
+        listaVentas={ventas}
+        />
       </form>
     </div>
   );
@@ -264,7 +281,10 @@ const FilaVehiculo = ({ veh, index, eliminarVehiculo, modificarVehiculo }) => {
   );
 };
 
-const TablaVentas = () => {
+const TablaVentas = ({listaVentas}) => {
+  useEffect(() => {
+    console.log('este es el listado de vehiculos en el componente de tabla', listaVentas);
+  }, [listaVentas]);
   return (
     <table className='tabla'>
     <thead>
@@ -274,24 +294,23 @@ const TablaVentas = () => {
         <th>Valor</th>
         <th>Estado</th>
         <th>Cantidad</th>
-        <th>Vendedor</th>
-        <th>Eliminar</th>
-        
-        <PrivateComponent roleList={['admin']}>
-          <th>Acciones</th>
-        </PrivateComponent>
+        <th>Vendedor</th>     
       </tr>
     </thead>
     <tbody>
-     {/*  {vehiculosFiltrados.map((vehiculo) => {
+      {listaVentas.map((ventas)=>{
         return (
-          <FilaVehiculo
-            key={nanoid()}
-            vehiculo={vehiculo}
-            setEjecutarConsulta={setEjecutarConsulta}
-          />
-        );
-      })} */}
+          <tr>
+            <td>{ventas._id}</td>
+            <td>{ventas.vehiculos.[0].name}</td>
+            <td>{ventas.cantidad}</td>
+            <td>{ventas.vehiculos.[0].state}</td>
+            <td>{ventas._id}</td>
+            <td>{ventas.vendedor.name}</td>            
+          </tr>
+        )
+      })
+      }  
     </tbody>
   </table>
   )

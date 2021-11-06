@@ -89,3 +89,14 @@ export const crearVenta = async (data, successCallback, errorCallback) => {
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
+
+export const obtenerVentas = async (successCallback, errorCallback) => {
+  const options = {
+    method: 'GET',
+    url: 'http://localhost:5000/ventas/',
+    headers: {
+      Authorization: getToken(),
+    },
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
