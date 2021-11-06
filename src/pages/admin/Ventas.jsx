@@ -293,7 +293,6 @@ const TablaVentas = ({listaVentas}) => {
         <th>Nombre</th>
         <th>Valor</th>
         <th>Estado</th>
-        <th>Cantidad</th>
         <th>Vendedor</th>     
       </tr>
     </thead>
@@ -305,7 +304,6 @@ const TablaVentas = ({listaVentas}) => {
             <td>{ventas.vehiculos.[0].name}</td>
             <td>{ventas.cantidad}</td>
             <td>{ventas.vehiculos.[0].state}</td>
-            <td>{ventas._id}</td>
             <td>{ventas.vendedor.name}</td>            
           </tr>
         )
