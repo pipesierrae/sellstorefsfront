@@ -57,7 +57,7 @@ const Vehiculos = () => {
     <div className='flex h-full w-full flex-col items-center justify-start p-8'>
       <div className='flex flex-col w-full'>
         <h2 className='text-3xl font-extrabold text-gray-900 text-center'>
-          Página de administración de vehículos
+           Administración de Vehículos
         </h2>
         <button
           onClick={() => {
@@ -82,7 +82,7 @@ const Vehiculos = () => {
           setVehiculos={setVehiculos}
         />
       )}
-      {/* <ToastContainer position='bottom-center' autoClose={5000} /> */}
+      <ToastContainer position='bottom-center' autoClose={5000} />
     </div>
   );
 };
@@ -143,8 +143,8 @@ const TablaVehiculos = ({ loading, listaVehiculos, setEjecutarConsulta }) => {
           return (
             <div className='bg-gray-400 m-2 shadow-xl flex flex-col p-2 rounded-xl'>
               <span>{el.name}</span>
-              <span>{el.brand}</span>
-              <span>{el.model}</span>
+              <span>{el.price}</span>
+              <span>{el.state}</span>
             </div>
           );
         })}
@@ -159,8 +159,8 @@ const FilaVehiculo = ({ vehiculo, setEjecutarConsulta }) => {
   const [infoNuevoVehiculo, setInfoNuevoVehiculo] = useState({
     _id: vehiculo._id,
     name: vehiculo.name,
-    brand: vehiculo.brand,
-    model: vehiculo.model,
+    price: vehiculo.price,
+    state: vehiculo.state,
   });
 
   const actualizarVehiculo = async () => {
@@ -170,8 +170,8 @@ const FilaVehiculo = ({ vehiculo, setEjecutarConsulta }) => {
       vehiculo._id,
       {
         name: infoNuevoVehiculo.name,
-        brand: infoNuevoVehiculo.brand,
-        model: infoNuevoVehiculo.model,
+        price: infoNuevoVehiculo.price,
+        state: infoNuevoVehiculo.state,
       },
       (response) => {
         console.log(response.data);
@@ -220,9 +220,9 @@ const FilaVehiculo = ({ vehiculo, setEjecutarConsulta }) => {
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
               type='text'
-              value={infoNuevoVehiculo.brand}
+              value={infoNuevoVehiculo.price}
               onChange={(e) =>
-                setInfoNuevoVehiculo({ ...infoNuevoVehiculo, brand: e.target.value })
+                setInfoNuevoVehiculo({ ...infoNuevoVehiculo, price: e.target.value })
               }
             />
           </td>
@@ -230,9 +230,9 @@ const FilaVehiculo = ({ vehiculo, setEjecutarConsulta }) => {
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
               type='text'
-              value={infoNuevoVehiculo.model}
+              value={infoNuevoVehiculo.state}
               onChange={(e) =>
-                setInfoNuevoVehiculo({ ...infoNuevoVehiculo, model: e.target.value })
+                setInfoNuevoVehiculo({ ...infoNuevoVehiculo, state: e.target.value })
               }
             />
           </td>
@@ -241,8 +241,8 @@ const FilaVehiculo = ({ vehiculo, setEjecutarConsulta }) => {
         <>
           <td>{vehiculo._id.slice(20)}</td>
           <td>{vehiculo.name}</td>
-          <td>{vehiculo.brand}</td>
-          <td>{vehiculo.model}</td>
+          <td>{vehiculo.price}</td>
+          <td>{vehiculo.state}</td>
         </>
       )}
 
@@ -324,8 +324,8 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
     await crearVehiculo(
       {
         name: nuevoVehiculo.name,
-        brand: nuevoVehiculo.brand,
-        model: nuevoVehiculo.model,
+        price: nuevoVehiculo.price,
+        state: nuevoVehiculo.state,
       },
       (response) => {
         console.log(response.data);
@@ -336,25 +336,6 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
         toast.error('Error creando un vehículo');
       }
     );
-
-    // const options = {
-    //   method: 'POST',
-    //   url: 'http://localhost:5000/vehiculos/nuevo/',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   data: { name: nuevoVehiculo.name, brand: nuevoVehiculo.brand, model: nuevoVehiculo.model },
-    // };
-
-    // await axios
-    //   .request(options)
-    //   .then(function (response) {
-    //     console.log(response.data);
-    //     toast.success('Vehículo agregado con éxito');
-    //   })
-    //   .catch(function (error) {
-    //     console.error(error);
-    //     toast.error('Error creando un vehículo');
-    //   });
-
     setMostrarTabla(true);
   };
 
@@ -375,7 +356,7 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
         <label className='flex flex-col' htmlFor='valor'>
           Valor
           <input
-            name='brand'
+            name='price'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
             placeholder='0'
             required
@@ -385,7 +366,7 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
           Estado
           <select
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            name='model'
+            name='state'
             required
             defaultValue={0}
           >

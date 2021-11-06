@@ -4,84 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { crearVenta } from 'utils/api';
 import { obtenerVehiculos } from 'utils/api';
 import { obtenerUsuarios } from 'utils/api';
+import PrivateComponent from 'components/PrivateComponent';
 
-// const Ventas = () => {
-//   const form = useRef(null);
-//   const [vendedores, setVendedores] = useState([]);
-//   const [vehiculos, setVehiculos] = useState([]);
-//   const [vehiculosTabla, setVehiculosTabla] = useState([]);
-
-//   useEffect(() => {
-//     const fetchVendores = async () => {
-//       await obtenerUsuarios(
-//         (response) => {
-//           console.log('respuesta de usuarios', response);
-//           setVendedores(response.data);
-//         },
-//         (error) => {
-//           console.error(error);
-//         }
-//       );
-//     };
-//     const fetchVehiculos = async () => {
-//       await obtenerVehiculos(
-//         (response) => {
-//           setVehiculos(response.data);
-//         },
-//         (error) => {
-//           console.error(error);
-//         }
-//       );
-//     };
-
-//     fetchVendores();
-//     fetchVehiculos();
-//   }, []);
-
-//   const modifyVeh = (v, e) => {
-//     const vehs = vehiculos.map((ve) => {
-//       if (ve._id === v._id) {
-//         ve.cantidad = e;
-//       }
-//       return ve;
-//     });
-//     setVehiculos(vehs);
-//   };
-
-//   useEffect(() => {
-//     console.log('vehiculos', vehiculos);
-//   }, [vehiculos]);
-
-//   return (
-//     <table>
-//       {vehiculos.map((v, index) => {
-//         return <Vehiculo key={index} v={v} index={index} modifyVeh={modifyVeh} />;
-//       })}
-//     </table>
-//   );
-// };
-
-// const Vehiculo = ({ v, index, modifyVeh }) => {
-//   const [vehi, setVehi] = useState(v);
-//   useEffect(() => {
-//     console.log('v', vehi);
-//   }, [vehi]);
-//   return (
-//     <tr>
-//       <td>{vehi.name}</td>
-//       <td>
-//         <input
-//           name={`cantidad_${index}`}
-//           value={vehi.cantidad}
-//           onChange={(e) => {
-//             modifyVeh(vehi, e.target.value);
-//             setVehi({ ...vehi, cantidad: e.target.value });
-//           }}
-//         />
-//       </td>
-//     </tr>
-//   );
-// };
 
 const Ventas = () => {
   const form = useRef(null);
@@ -191,6 +115,9 @@ const Ventas = () => {
         >
           Crear Venta
         </button>
+        <br/>
+        <h2 className='text-2xl font-extrabold text-gray-800 text-center'>Todas las Ventas</h2>
+        <TablaVentas />
       </form>
     </div>
   );
@@ -246,7 +173,7 @@ const TablaVehiculos = ({ vehiculos, setVehiculos, setVehiculosTabla }) => {
                 <option
                   key={nanoid()}
                   value={el._id}
-                >{`${el.name} ${el.brand} ${el.model}`}</option>
+                >{`${el.name} ${el.price} ${el.state}`}</option>
               );
             })}
           </select>
@@ -301,8 +228,8 @@ const FilaVehiculo = ({ veh, index, eliminarVehiculo, modificarVehiculo }) => {
     <tr>
       <td>{vehiculo._id}</td>
       <td>{vehiculo.name}</td>
-      <td>{vehiculo.brand}</td>
-      <td>{vehiculo.model}</td>
+      <td>{vehiculo.price}</td>
+      <td>{vehiculo.state}</td>
       <td>
         <label htmlFor={`valor_${index}`}>
           <input
@@ -315,14 +242,14 @@ const FilaVehiculo = ({ veh, index, eliminarVehiculo, modificarVehiculo }) => {
                 ...vehiculo,
                 cantidad: e.target.value === '' ? '0' : e.target.value,
                 total:
-                  parseFloat(vehiculo.brand) *
+                  parseFloat(vehiculo.price) *
                   parseFloat(e.target.value === '' ? '0' : e.target.value),
               });
             }}
           />
         </label>
       </td>
-      <td>{vehiculo.brand}</td>
+      <td>{vehiculo.price}</td>
       <td>{parseFloat(vehiculo.total ?? 0)}</td>
       <td>
         <i
@@ -335,6 +262,39 @@ const FilaVehiculo = ({ veh, index, eliminarVehiculo, modificarVehiculo }) => {
       </td>
     </tr>
   );
+};
+
+const TablaVentas = () => {
+  return (
+    <table className='tabla'>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Valor</th>
+        <th>Estado</th>
+        <th>Cantidad</th>
+        <th>Vendedor</th>
+        <th>Eliminar</th>
+        
+        <PrivateComponent roleList={['admin']}>
+          <th>Acciones</th>
+        </PrivateComponent>
+      </tr>
+    </thead>
+    <tbody>
+     {/*  {vehiculosFiltrados.map((vehiculo) => {
+        return (
+          <FilaVehiculo
+            key={nanoid()}
+            vehiculo={vehiculo}
+            setEjecutarConsulta={setEjecutarConsulta}
+          />
+        );
+      })} */}
+    </tbody>
+  </table>
+  )
 };
 
 export default Ventas;
