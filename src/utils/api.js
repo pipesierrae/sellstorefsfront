@@ -96,7 +96,7 @@ export const crearVenta = async (data, successCallback, errorCallback) => {
 export const obtenerVentas = async (successCallback, errorCallback) => {
   const options = {
     method: 'GET',
-    url: 'http://localhost:5000/ventas/',
+    url: `${baseURL}/ventas/`,
     headers: {
       Authorization: getToken(),
     },
