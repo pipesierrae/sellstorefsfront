@@ -50,14 +50,14 @@ const Vehiculos = () => {
       setColorBoton('indigo');
     } else {
       setTextoBoton('Mostrar Todos los vehículos');
-      setColorBoton('green');
+      setColorBoton('blue');
     }
   }, [mostrarTabla]);
   return (
     <div className='flex h-full w-full flex-col items-center justify-start p-8'>
       <div className='flex flex-col w-full'>
-        <h2 className='text-3xl font-extrabold text-gray-900'>
-          Página de administración de vehículos
+        <h2 className='text-3xl font-extrabold text-gray-900 text-center'>
+           Administración de Vehículos
         </h2>
         <button
           onClick={() => {
@@ -116,9 +116,9 @@ const TablaVehiculos = ({ loading, listaVehiculos, setEjecutarConsulta }) => {
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Nombre del vehículo</th>
-                <th>Marca del vehículo</th>
-                <th>Modelo del vehículo</th>
+                <th>Descripción</th>
+                <th>Valor</th>
+                <th>Estado</th>
                 <PrivateComponent roleList={['admin']}>
                   <th>Acciones</th>
                 </PrivateComponent>
@@ -143,8 +143,8 @@ const TablaVehiculos = ({ loading, listaVehiculos, setEjecutarConsulta }) => {
           return (
             <div className='bg-gray-400 m-2 shadow-xl flex flex-col p-2 rounded-xl'>
               <span>{el.name}</span>
-              <span>{el.brand}</span>
-              <span>{el.model}</span>
+              <span>{el.price}</span>
+              <span>{el.state}</span>
             </div>
           );
         })}
@@ -159,8 +159,8 @@ const FilaVehiculo = ({ vehiculo, setEjecutarConsulta }) => {
   const [infoNuevoVehiculo, setInfoNuevoVehiculo] = useState({
     _id: vehiculo._id,
     name: vehiculo.name,
-    brand: vehiculo.brand,
-    model: vehiculo.model,
+    price: vehiculo.price,
+    state: vehiculo.state,
   });
 
   const actualizarVehiculo = async () => {
@@ -170,8 +170,8 @@ const FilaVehiculo = ({ vehiculo, setEjecutarConsulta }) => {
       vehiculo._id,
       {
         name: infoNuevoVehiculo.name,
-        brand: infoNuevoVehiculo.brand,
-        model: infoNuevoVehiculo.model,
+        price: infoNuevoVehiculo.price,
+        state: infoNuevoVehiculo.state,
       },
       (response) => {
         console.log(response.data);
@@ -220,9 +220,9 @@ const FilaVehiculo = ({ vehiculo, setEjecutarConsulta }) => {
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
               type='text'
-              value={infoNuevoVehiculo.brand}
+              value={infoNuevoVehiculo.price}
               onChange={(e) =>
-                setInfoNuevoVehiculo({ ...infoNuevoVehiculo, brand: e.target.value })
+                setInfoNuevoVehiculo({ ...infoNuevoVehiculo, price: e.target.value })
               }
             />
           </td>
@@ -230,9 +230,9 @@ const FilaVehiculo = ({ vehiculo, setEjecutarConsulta }) => {
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
               type='text'
-              value={infoNuevoVehiculo.model}
+              value={infoNuevoVehiculo.state}
               onChange={(e) =>
-                setInfoNuevoVehiculo({ ...infoNuevoVehiculo, model: e.target.value })
+                setInfoNuevoVehiculo({ ...infoNuevoVehiculo, state: e.target.value })
               }
             />
           </td>
@@ -241,8 +241,8 @@ const FilaVehiculo = ({ vehiculo, setEjecutarConsulta }) => {
         <>
           <td>{vehiculo._id.slice(20)}</td>
           <td>{vehiculo.name}</td>
-          <td>{vehiculo.brand}</td>
-          <td>{vehiculo.model}</td>
+          <td>{vehiculo.price}</td>
+          <td>{vehiculo.state}</td>
         </>
       )}
 
@@ -324,8 +324,8 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
     await crearVehiculo(
       {
         name: nuevoVehiculo.name,
-        brand: nuevoVehiculo.brand,
-        model: nuevoVehiculo.model,
+        price: nuevoVehiculo.price,
+        state: nuevoVehiculo.state,
       },
       (response) => {
         console.log(response.data);
@@ -336,25 +336,6 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
         toast.error('Error creando un vehículo');
       }
     );
-
-    // const options = {
-    //   method: 'POST',
-    //   url: 'http://localhost:5000/vehiculos/nuevo/',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   data: { name: nuevoVehiculo.name, brand: nuevoVehiculo.brand, model: nuevoVehiculo.model },
-    // };
-
-    // await axios
-    //   .request(options)
-    //   .then(function (response) {
-    //     console.log(response.data);
-    //     toast.success('Vehículo agregado con éxito');
-    //   })
-    //   .catch(function (error) {
-    //     console.error(error);
-    //     toast.error('Error creando un vehículo');
-    //   });
-
     setMostrarTabla(true);
   };
 
@@ -363,7 +344,7 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
       <h2 className='text-2xl font-extrabold text-gray-800'>Crear nuevo vehículo</h2>
       <form ref={form} onSubmit={submitForm} className='flex flex-col'>
         <label className='flex flex-col' htmlFor='nombre'>
-          Nombre del vehículo
+          Descripción
           <input
             name='name'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
@@ -372,40 +353,34 @@ const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehic
             required
           />
         </label>
-        <label className='flex flex-col' htmlFor='marca'>
-          Marca del vehículo
+        <label className='flex flex-col' htmlFor='valor'>
+          Valor
+          <input
+            name='price'
+            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+            placeholder='0'
+            required
+          />
+        </label>
+        <label className='flex flex-col' htmlFor='estado'>
+          Estado
           <select
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            name='brand'
+            name='state'
             required
             defaultValue={0}
           >
             <option disabled value={0}>
               Seleccione una opción
             </option>
-            <option>Renault</option>
-            <option>Toyota</option>
-            <option>Ford</option>
-            <option>Mazda</option>
-            <option>Chevrolet</option>
+            <option>Disponible</option>
+            <option>No disponible</option>
           </select>
-        </label>
-        <label className='flex flex-col' htmlFor='modelo'>
-          Modelo del vehículo
-          <input
-            name='model'
-            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            type='number'
-            min={1992}
-            max={2022}
-            placeholder='2014'
-            required
-          />
         </label>
 
         <button
           type='submit'
-          className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'
+          className='col-span-2 bg-indigo-900 p-2 rounded-full shadow-md hover:bg-indigo-600 text-white'
         >
           Guardar vehiculo
         </button>
